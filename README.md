@@ -549,16 +549,8 @@ sound of rain hitting canvas, you've just created a sample.
 Sonic Pi lets you do lots of fun things with samples. Not only does it
 ship with over 90 public domain samples ready for you to jam with, it
 lets you play and manipulate your own. Let's get to it...
-3.1 Triggering Samples
 
 # Triggering Samples
-
-Playing beeps is only the beginning. Something that's a lot of fun is
-triggering pre-recorded samples. Try it:
-
-```
-sample :ambi_lunar_land
-```
 
 Sonic Pi includes many samples for you to play with. You can use them
 just like you use the `play` command. To play multiple samples and notes
@@ -597,24 +589,9 @@ envelopes.
 There are two ways to discover the range of samples provided in Sonic
 Pi. First, you can use this help system. Click on Samples in the far
 left vertical menu, choose your category and then you'll see a list of
-available sounds.
-
-Alternatively you can use the *auto-completion system*. Simply type the
+available sounds. Alternatively you can use the *auto-completion system*. Simply type the
 start of a sample group such as: `sample :ambi_` and you'll see a
-drop-down of sample names appear for you to select. Try the following
-category prefixes:
-
-* `:ambi_` 
-* `:bass_`
-* `:elec_`
-* `:perc_`
-* `:guit_`
-* `:drum_`
-* `:misc_`
-* `:bd_`
-
-Now start mixing samples into your compositions!
-3.2 Sample Parameters
+drop-down of sample names appear for you to select. 
 
 # Sample Parameters: Amp and Pan
 
@@ -649,7 +626,6 @@ seconds.
 Finally, note that if you set some synth defaults with
 `use_synth_defaults` (which we will discuss later), these will be
 ignored by `sample`.
-3.3 Stretching Samples
 
 # Stretching Samples
 
@@ -743,27 +719,6 @@ the spring decreases its density and is similar to the sound having a
 
 ## The Maths Behind Sample Rate
 
-(This section is provided for those that are interested in the
-details. Please feel free to skip it...)
-
-As we saw above, a sample is represented by a big long list of numbers
-representing where the speaker should be through time. We can take this
-list of numbers and use it to draw a graph which would look similar to
-this:
-
-![sample graph](../images/tutorial/sample.png)
-
-You might have seen pictures like this before. It's called the
-*waveform* of a sample. It's just a graph of numbers. Typically a
-waveform like this will have 44100 points of data per second (this is
-due to the Nyquist-Shannon sampling theorem). So, if the sample lasts
-for 2 seconds, the waveform will be represented by 88200 numbers which
-we would feed to the speaker at a rate of 44100 points per second. Of
-course, we could feed it at double rate which would be 88200 points per
-second. This would therefore take only 1 second to play back. We could
-also play it back at half rate which would be 22050 points per second
-taking 4 seconds to play back.
-
 The duration of the sample is affected by the playback rate: 
 
 * Doubling the playback rate halves the playback time,
@@ -797,11 +752,12 @@ frequency*. Other rates will affect the frequency accordingly.
 
 It is also possible to modify the *duration* and *amplitude* of a sample
 using an ADSR envelope. However, this works slightly differently to the
-ADSR envelope available on synths. Sample envelopes only allow you to
-reduce the amplitude and duration of a sample - and never to increase
-it. The sample will stop when either the sample has finished playing or
-the envelope has completed - whichever is first. So, if you use a very
-long `release:`, it won't extend the duration of the sample.
+ADSR envelope available on synths. 
+
+Sample envelopes only allow you to reduce the amplitude and duration of a 
+sample - and never to increaseit. The sample will stop when either the sample 
+has finished playing or the envelope has completed - whichever is first. So, 
+if you use a very long `release:`, it won't extend the duration of the sample.
 
 ## Amen Envelopes
 
@@ -812,7 +768,7 @@ sample :loop_amen
 ```
 
 With no opts, we hear the full sample at full amplitude. If we
-want to fade this in over 1 second we can use the `attack:` param:
+want to fade this IN over 1 second we can use the `attack:` param:
 
 ```
 sample :loop_amen, attack: 1
@@ -825,6 +781,9 @@ sample :loop_amen, attack: 0.3
 ```
 
 ## Auto Sustain
+
+For enveloping samples, you will want to check the duration of the sample
+for the following reason:
 
 Where the ADSR envelope's behaviour differs from the standard synth
 envelope is in the *sustain* value. In the standard synth envelope, the
@@ -916,7 +875,6 @@ sample :drum_cymbal_open, attack: 0.01, sustain: 0.3, release: 0.1
 
 Now go and have fun putting envelopes over the samples. Try changing the
 rate too for really interesting results.
-3.5 Partial Samples
 
 # Partial Samples
 
@@ -962,7 +920,7 @@ and 0.5 is half way through the sample. Let's try playing only the last
 half of the amen break:
 
 ```
-sample :loop_amen, start: 0.5
+sample :loop_amen, start: 0.5 # starts the sample halfway through
 ```
 
 How about the last quarter of the sample:
@@ -1019,7 +977,6 @@ sample :loop_amen, start: 0.5, finish: 0.8, rate: -0.2, attack: 0.3, release: 1
 ```
 
 Now go and have a play mashing up samples with all of this fun stuff...
-3.6 External Samples
 
 # External Samples
 
@@ -1072,8 +1029,6 @@ All you need to do is pass the path of that file to `sample`:
 ```
 # Raspberry Pi, Mac, Linux
 sample "/Users/sam/Desktop/my-sound.wav"
-# Windows
-sample "C:/Users/sam/Desktop/my-sound.wav"
 ```
 
 Sonic Pi will automatically load and play the sample. You can also pass
@@ -1082,10 +1037,7 @@ all the standard params you're used to passing `sample`:
 ```
 # Raspberry Pi, Mac, Linux
 sample "/Users/sam/Desktop/my-sound.wav", rate: 0.5, amp: 0.3
-# Windows
-sample "C:/Users/sam/Desktop/my-sound.wav", rate: 0.5, amp: 0.3
 ```
-4 Randomisation
 
 # Randomisation
 
@@ -1095,7 +1047,7 @@ your music, but before we start we need to learn a shocking truth: in
 Sonic Pi *random is not truly random*. What on earth does this mean?
 Well, let's see.
 
-## Repeatability
+## Repeatability (Reproduceability)
 
 A really useful random function is `rrand` which will give you a random
 value between two numbers - a *min* and a *max*. (`rrand` is short for
@@ -1134,19 +1086,6 @@ exactly the same. It's as if all Sonic Pi code went back in time to
 exactly the same point every time the Run button was pressed. It's the
 Groundhog Day of music synthesis!
 
-## Haunted Bells
-
-A lovely illustration of randomisation in action is the haunted bells
-example which loops the `:perc_bell` sample with a random rate and sleep
-time between bell sounds:
-
-```
-loop do
-  sample :perc_bell, rate: (rrand 0.125, 1.5)
-  sleep rrand(0.2, 2)
-end
-```
-
 ## Random cutoff
 
 Another fun example of randomisation is to modify the cutoff of a
@@ -1179,20 +1118,10 @@ end
 ```
 
 Every time you run this code, you'll hear the same sequence of 5
-notes. To get a different sequence simply change the seed:
-
-```
-use_random_seed 40
-5.times do
-  play rrand(50, 100)
-  sleep 0.5
-end
-```
-
-This will produce a different sequence of 5 notes. By changing the seed
-and listening to the results you can find something that you like - and
-when you share it with others, they will hear exactly what you heard
-too.
+notes. To get a different sequence simply change the seed. This will produce a 
+different sequence of 5 notes. By changing the seed and listening to the 
+results you can find something that you like - and when you share it with others, 
+they will hear exactly what you heard too.
 
 Let's have a look at some other useful random functions.
 
@@ -1223,8 +1152,8 @@ end
 
 We've already seen `rrand`, but let's run over it again. It returns a
 random number between two values exclusively. That means it will never
-return either the top or bottom number - always something in between the
-two. The number will always be a float - meaning it's not a whole number
+return either the top or bottom number - always something in between. 
+The number will always be a float - meaning it's not a whole number
 but a fraction of a number. Examples of floats returned by
 `rrand(20, 110)`:
 
@@ -1297,7 +1226,6 @@ programming structures such as looping, conditionals, functions and
 threads give you amazingly powerful tools to express your musical ideas.
 
 Let's get stuck in with the basics...
-5.1 Blocks
 
 # Blocks
 
@@ -1313,8 +1241,6 @@ following code:
 play 50
 sleep 0.5
 sample :elec_plip
-sleep 0.5
-play 62
 ```
 
 To do something with a chunk of code, we need to tell Sonic Pi where
@@ -1326,19 +1252,13 @@ do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 ```
 
 However, this isn't yet complete and won't work (try it and you'll get
 an error) as we haven't told Sonic Pi what we want to do with this
 *do/end block*. We tell Sonic Pi this by writing some special code
-before the `do`. We'll see a number of these special pieces of code
-later on in this tutorial. For now, it's important to know that wrapping
-your code within `do` and `end` tells Sonic Pi you wish to do something
-special with that chunk of code.
-5.2 Iteration and Loops
+before the `do`.
 
 # Iteration and Loops
 
@@ -1352,60 +1272,15 @@ up when you start using the power of code to structure your music and
 compositions. In the next few sections we'll explore some of these
 powerful new tools. First up is iteration and loops.
 
-## Repetition
+## Repetition and Iteration
 
-Have you written some code you'd like to repeat a few times? For
-example, you might have something like this:
-
-```
-play 50
-sleep 0.5
-sample :elec_blup
-sleep 0.5
-play 62
-sleep 0.25
-```
-
-What if we wished to repeat this 3 times? Well, we could do something
-simple and just copy and paste it three times:
-
-```
-play 50
-sleep 0.5
-sample :elec_blup
-sleep 0.5
-play 62
-sleep 0.25
-
-play 50
-sleep 0.5
-sample :elec_blup
-sleep 0.5
-play 62
-sleep 0.25
-
-play 50
-sleep 0.5
-sample :elec_blup
-sleep 0.5
-play 62
-sleep 0.25
-```
-
-Now that's a lot of code! What happens if you want to change the
-sample to `:elec_plip`? You're going to have to find all the places
-with the original `:elec_blup` and switch them over. More importantly,
-what if you wanted to repeat the original piece of code 50 times or
-1000? Now that would be a lot of code, and a lot of lines of code to
-alter if you wanted to make a change.
-
-## Iteration
+Have you written some code you'd like to repeat a few times? What if we 
+wished to repeat this 3 times? 
 
 In fact, repeating the code should be as easy as saying *do this three
-times*. Well, it pretty much is. Remember our old friend the code
-block? We can use it to mark the start and end of the code we'd like
-to repeat three times. We then use the special code `3.times`. So,
-instead of writing *do this three times*, we write `3.times do` -
+times*. Well, it pretty much is. We can use it to mark the start and end of 
+the code we'd like to repeat three times. We then use the special code `3.times`. 
+So, instead of writing *do this three times*, we write `3.times do` -
 that's not too hard. Just remember to write `end` at the end of the
 code you'd like to repeat:
 
@@ -1489,14 +1364,11 @@ end
 sample :drum_cymbal_open
 ```
 
-Now, get structuring your code with iteration and loops!
-5.3 Conditionals
-
 # Conditionals
 
 A common thing you'll likely find yourself wanting to do is to not only
 play a random note (see the previous section on randomness) but also
-make a random decision and based on the outcome run some code or some
+make a random decision and based on the outcome, run some code or some
 other code. For example, you might want to randomly play a drum or a
 cymbal. We can achieve this with an `if` statement.
 
@@ -1512,7 +1384,7 @@ cymbal:
 ```
 loop do
 
-  if one_in(2)
+  if one_in(2) # rolls a die with two faces (like flipping a coin - can specify more sides of the die)
     sample :drum_heavy_kick
   else
     sample :drum_cymbal_closed
@@ -1525,9 +1397,9 @@ end
 
 Notice that `if` statements have three parts:
 
-* The question to ask
-* The first choice of code to run (if the answer to the question is yes)
-* The second choice of code to run (if the answer to the question is no)
+* The question to ask - "is the answer to the one_in flip 2?"
+* The first choice of code to run (if the answer to the question is yes) - sample drum kick
+* The second choice of code to run (if the answer to the question is no) - sample drum cymbal
 
 Typically in programming languages, the notion of yes is represented by
 the term `true` and the notion of no is represented by the term
@@ -1576,7 +1448,6 @@ end
 
 This will play chords of different numbers with the chance of each note
 playing having a different probability.
-5.4 Threads
 
 # Threads
 
@@ -1586,12 +1457,12 @@ play some bass, then a bit of drums, then more bass... However, the
 timing soon gets hard to think about, especially when you start weaving
 in more elements.
 
-What if Sonic Pi could weave things for you automatically? Well, it can,
-and you do it with a special thing called a *thread*.
+Sonic Pi can weave things for you automatically, and you do it with
+a special thing called a *thread*.
 
 ## Infinite Loops
 
-To keep this example simple, you'll have to imagine that this is a
+To keep this example simple, you'll have to imagine that this is the
 phat beat and a killer bassline:
 
 ```
@@ -1636,32 +1507,9 @@ the next statement after the do/end block (which happens to be the
 second loop). Try it and you'll hear both the drums and the bassline
 weaved together!
 
-Now, what if we wanted to add a synth on top. Something like:
-
-```
-in_thread do
-  loop do
-    sample :drum_heavy_kick
-    sleep 1
-  end
-end
-
-loop do
-  use_synth :fm
-  play 40, release: 0.2
-  sleep 0.5
-end
-
-loop do
-  use_synth :zawa
-  play 52, release: 2.5, phase: 2, amp: 0.5
-  sleep 2
-end
-```
-
-Now we have the same problem as before. The first loop is played at the
-same time as the second loop due to the `in_thread`. However, *the third
-loop is never reached*. We therefore need another thread:
+Now, what if we wanted to add a synth on top. We will have the same problem as 
+before. The first loop is played at the same time as the second loop due to the `in_thread`. 
+However, *the third loop is never reached*. We therefore need another thread:
 
 ```
 in_thread do
@@ -1701,8 +1549,8 @@ most important building blocks for your music. One of the important jobs
 they have is to isolate the notion of *current settings* from other
 threads. What does this mean? Well, when you switch synths using
 `use_synth` you're actually just switching the synth in the *current
-thread* - no other thread will have their synth switched. Let's see this
-in action:
+thread* - no other thread will have their synth switched. Settings within
+a thread only apply to that thread! Let's see this in action:
 
 ```
 play 50
@@ -1766,37 +1614,16 @@ in_thread(name: :drums) do
 end
 ```
 
-Look at the log pane when you run this code. See how the log reports the
-name of the thread with the message?
-
-```
-[Run 36, Time 4.0, Thread :bass]
- |- synth :prophet, {release: 0.6, note: 47}
-```
+Look at the log pane, See how the log reports the name?
 
 ## Only One Thread per Name Allowed
 
 One last thing to know about named threads is that only one thread of
-a given name may be running at the same time. Let's explore this.
-Consider the following code:
+a given name may be running at the same time. 
 
-```
-in_thread do
-  loop do
-    sample :loop_amen
-    sleep sample_duration :loop_amen
-  end
-end
-```
-
-Go ahead and paste that into a buffer and press the Run button. Press
-it again a couple of times. Listen to the cacophony of multiple amen
-breaks looping out of time with each other. Ok, you can press Stop now.
-
-This is the behaviour we've seen again and again - if you press the Run
-button, sound layers on top of any existing sound. Therefore if you have
-a loop and press the Run button three times, you'll have three layers of
-loops playing simultaneously.
+If you press the Run button, sound layers on top of any existing sound. 
+Therefore if you have a loop and press the Run button three times, you'll 
+have three layers of loops playing simultaneously.
 
 However, with named threads it is different:
 
@@ -1810,18 +1637,11 @@ end
 ```
 
 Try pressing the Run button multiple times with this code. You'll only
-ever hear one amen break loop. You'll also see this in the log:
-
-```
-==> Skipping thread creation: thread with name :amen already exists.
-```
-
-Sonic Pi is telling you that a thread with the name `:amen` is already
-playing, so it's not creating another.
+ever hear one amen break loop. Sonic Pi is telling you that a thread with the 
+name `:amen` is already playing, so it's not creating another.
 
 This behaviour may not seem immediately useful to you now - but it will
 be very handy when we start to live code...
-5.5 Functions
 
 # Functions
 
@@ -1844,8 +1664,8 @@ end
 Here, we've defined a new function called `foo`. We do this with our old
 friend the do/end block and the magic word `define` followed by the name
 we wish to give to our function. We didn't have to call it `foo`, we could
-have called it anything we want such as `bar`, `baz` or ideally
-something meaningful to you like `main_section` or `lead_riff`.
+have called it anything we want, ideally something meaningful to you like 
+`main_section` or `lead_riff`.
 
 Remember to prepend a colon `:` to the name of your function when you define
 it.
@@ -1873,8 +1693,9 @@ end
 ```
 
 We can even use `foo` inside iteration blocks or anywhere we may have
-written `play` or `sample`. This gives us a great way to express
-ourselves and to create new meaningful words for use in our compositions.
+written `play` or `sample`, INCLUDING LOOPS! This gives us a great way 
+to express ourselves and to create new meaningful words for use in our 
+compositions.
 
 ## Functions are remembered across runs
 
@@ -1882,53 +1703,15 @@ So far, every time you've pressed the Run button, Sonic Pi has started
 from a completely blank slate. It knows nothing except for what is in
 the buffer. You can't reference code in another buffer or another
 thread. However, functions change that. When you define a function,
-Sonic Pi *remembers* it. Let's try it. Delete all the code in your
-buffer and replace it with:
-
-```
-foo
-```
-
-Press the Run button - and hear your function play. Where did the code
-go? How did Sonic Pi know what to play? Sonic Pi just remembered your
-function - so even after you deleted it from the buffer, it
-remembered what you had typed. This behaviour only works with functions
+Sonic Pi *remembers* it. So even after you deleted it from the buffer, it
+remembered what you typed. This behaviour only works with functions
 created using `define` (and `defonce`).
 
 ## Parameterised functions
 
-You might be interested in knowing that just like you can pass min and
+You might be interested in knowing that, just like you can pass min and
 max values to `rrand`, you can teach your functions to accept
 arguments. Let's take a look:
-
-```
-define :my_player do |n|
-  play n
-end
-
-my_player 80
-sleep 0.5
-my_player 90
-```
-
-This isn't very exciting, but it illustrates the point. We've created
-our own version of `play` called `my_player` which is parameterised.
-
-The parameters need to go after the `do` of the `define` do/end block,
-surrounded by vertical goalposts `|` and separated by commas `,`. You
-may use any words you want for the parameter names.
-
-The magic happens inside the `define` do/end block. You may use the
-parameter names as if they were real values. In this example I'm playing
-note `n`.  You can consider the parameters as a kind of promise that
-when the code runs, they will be replaced with actual values. You do
-this by passing a parameter to the function when you call it. I do this
-with `my_player 80` to play note 80. Inside the function definition, `n`
-is now replaced with 80, so `play n` turns into `play 80`. When I call
-it again with `my_player 90`, `n` is now replaced with 90, so `play n`
-turns into `play 90`.
-
-Let's see a more interesting example:
 
 ``` 
 define :chord_player do |root, repeats| 
@@ -1947,12 +1730,23 @@ chord_player :e3, 3
 
 ```
 
+This is saying: Create a function called chord_player. It expects TWO inputs called 
+root and repeats. When it runs, it will plug in your inputted values for root and 
+repeats to the function. In this case, it will play a minor chord, with a release
+of 0.3, on the inputted "root" value with 0.5s between each note. It will then repeat 
+it based on the inputted "repeats" value to the function (repeatsvalue.times)
+
+We've created our own version of `play` called `chord_player` which is parameterised.
+
+The parameters need to go after the `do` of the `define` do/end block,
+surrounded by vertical goalposts `|` and separated by commas `,`. You
+may use any words you want for the parameter names.
+
 Here I used `repeats` as if it was a number in the line `repeats.times
 do`. I also used `root` as if it was a note name in my call to `play`.
 
 See how we're able to write something very expressive and easy to read
 by moving a lot of our logic into a function!
-5.6 Variables
 
 # Variables
 
@@ -1977,7 +1771,7 @@ There are three main reasons for using variables in Sonic Pi:
 communicating meaning, managing repetition and capturing the results
 of things.
 
-## Communicating Meaning
+## Communicating Meaning and Managing Repetition
 
 When you write code it's easy to just think you're telling the computer
 how to do stuff - as long as the computer understands it's OK. However,
@@ -1991,66 +1785,18 @@ One way to help others understand what your code is doing is to write
 comments (as we saw in a previous section). Another is to use meaningful
 variable names. Look at this code:
 
-```
-sleep 1.7533
-```
-
-Why does it use the number `1.7533`? Where did this number come from?
-What does it mean? However, look at this code:
-
-```
-loop_amen_duration = 1.7533
-sleep loop_amen_duration
-```
-
-Now, it's much clearer what `1.7533` means: it's the duration of the
-sample `:loop_amen`! Of course, you might say why not simply write:
-
-```
-sleep sample_duration(:loop_amen)
-```
-
-Which, of course, is a very nice way of communicating the intent of the
-code.
-
-## Managing Repetition
-
-Often you see a lot of repetition in your code and when you want to
-change things, you have to change it in a lot of places. Take a look at
-this code:
-
-```
-sample :loop_amen
-sleep sample_duration(:loop_amen)
-sample :loop_amen, rate: 0.5
-sleep sample_duration(:loop_amen, rate: 0.5)
-sample :loop_amen
-sleep sample_duration(:loop_amen)
-```
-
-We're doing a lot of things with `:loop_amen`! What if we wanted to
-hear what it sounded like with another loop sample such as
-`:loop_garzul`? We'd have to find and replace all `:loop_amen`s with
-`:loop_garzul`. That might be fine if you have lots of time - but what
-if you're performing on stage? Sometimes you don't have the luxury of
-time - especially if you want to keep people dancing.
-
-What if you'd written your code like this:
-
-```
+'''
 sample_name = :loop_amen
+
 sample sample_name
 sleep sample_duration(sample_name)
 sample sample_name, rate: 0.5
 sleep sample_duration(sample_name, rate: 0.5)
 sample sample_name
-sleep sample_duration(sample_name)
-```
+sleep sample_duration(sample_name) 
+'''
 
-Now, that does exactly the same as above (try it). It also gives us
-the ability to just change one line `sample_name = :loop_amen` to
-`sample_name = :loop_garzul` and we change it in many places through
-the magic of variables.
+This variable allows you to change the loop sample for all of them at the same time!
 
 ## Capturing Results
 
@@ -2082,7 +1828,6 @@ control s, note: 62
 ```
 
 We'll look into controlling synths in more detail in a later section.
-5.7 Thread Synchronisation
 
 # Thread Synchronisation
 
@@ -2111,8 +1856,7 @@ and `sync`.
 
 `cue` allows us to send out heartbeat messages to all other threads. By
 default the other threads aren't interested and ignore these heartbeat
-messages. However, you can easily register interest with the `sync`
-function.
+messages. However, you can easily register interest with `sync`.
 
 The important thing to be aware of is that `sync` is similar to
 `sleep` in that it stops the current thread from doing anything for a
@@ -2225,7 +1969,7 @@ This of course also works if you order the threads in reverse as the
 
 One of the most rewarding and fun aspects of Sonic Pi is the ability to
 easily add studio effects to your sounds. For example, you may wish to
-add some reverb to parts of your piece, or some echo or perhaps even
+add some reverb to parts of your piece, or some echo or even
 distort or wobble your basslines.
 
 Sonic Pi provides a very simple yet powerful way of adding FX. It even
@@ -2238,9 +1982,7 @@ throughout the track...
 
 ## Guitar Pedals
 
-If all of this sounds a bit complicated, don't worry. Once you play
-around with it a little, it will all become quite clear. Before you do
-though, a simple analogy is that of guitar FX pedals. There are many
+A simple analogy is that of guitar FX pedals. There are many
 kinds of FX pedals you can buy. Some add reverb, others distort etc. A
 guitarist will plug his or her guitar into one FX pedal -
 i.e. distortion -, then take another cable and connect (chain) a
@@ -2260,17 +2002,11 @@ they're playing. Sonic Pi also supports this - but instead of needing
 someone else to control things for you, that's where the computer
 steps in.
 
-Let's explore FX!
-6.1 Adding FX
-
 # Adding FX
 
 In this section we'll look at a couple of FX: reverb and echo. We'll
 see how to use them, how to control their opts and how to chain
 them.
-
-Sonic Pi's FX system uses blocks. So if you haven't read section 5.1 you
-might want to take a quick look and then head back.
 
 ## Reverb
 
@@ -2287,9 +2023,6 @@ with_fx :reverb do
 end
 ```
 
-Now play this code and you'll hear it played with reverb. It sounds
-good, doesn't it! Everything sounds pretty nice with reverb.
-
 Now let's look what happens if we have code outside the do/end block:
 
 ```
@@ -2297,35 +2030,17 @@ with_fx :reverb do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 
 sleep 1
 play 55
 ```
 
-Notice how the final `play 55` isn't played with reverb. This is because
+Notice how the final `play 55` isn't played with reverb because
 it is *outside* the do/end block, so it isn't captured by the reverb FX.
 
 Similarly, if you make sounds before the do/end block, they also won't
 be captured:
-
-```
-play 55
-sleep 1
-
-with_fx :reverb do
-  play 50
-  sleep 0.5
-  sample :elec_plip
-  sleep 0.5
-  play 62
-end
-
-sleep 1
-play 55
-```
 
 ## Echo
 
@@ -2336,15 +2051,13 @@ with_fx :echo do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 ```
 
 One of the powerful aspects of Sonic Pi's FX blocks is that they may be
 passed parameters similar to parameters we've already seen with `play`
 and `sample`. For example a fun echo parameter to play with is `phase:`
-which represents the duration of a given echo in beats. Let's make the
+which represents the *duration of a given echo* in beats. Let's make the
 echo slower:
 
 ```
@@ -2352,8 +2065,6 @@ with_fx :echo, phase: 0.5 do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 ```
 
@@ -2364,8 +2075,6 @@ with_fx :echo, phase: 0.125 do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 ```
 
@@ -2377,8 +2086,6 @@ with_fx :echo, phase: 0.5, decay: 8 do
   play 50
   sleep 0.5
   sample :elec_plip
-  sleep 0.5
-  play 62
 end
 ```
 
@@ -2395,13 +2102,11 @@ with_fx :reverb do
     play 50
     sleep 0.5
     sample :elec_blup
-    sleep 0.5
-    play 62
   end
 end
 ```
 
-Think about the audio flowing from the inside out. The sound of all
+Think about the audio flowing from the *inside out*. The sound of all
 the code within the inner do/end block such as `play 50` is first sent
 to the echo FX and the sound of the echo FX is in turn sent out to the
 reverb FX.
@@ -2414,18 +2119,8 @@ especially on low powered platforms such as the Raspberry Pi.
 ## Discovering FX
 
 Sonic Pi ships with a large number of FX for you to play with. To find
-out which ones are available, click on FX in the far left of this help
-system and you'll see a list of available options. Here's a list of
-some of my favourites:
-
-* wobble,
-* reverb,
-* echo,
-* distortion,
-* slicer
-
-Now go crazy and add FX everywhere for some amazing new sounds!
-6.2 FX in Practice
+out which ones are available, click on FX in the far left of the help
+system and you'll see a list of available options.
 
 # FX in Practice
 
@@ -2433,8 +2128,7 @@ Although they look deceptively simple on the outside, FX are actually
 quite complex beasts internally. Their simplicity often entices people
 to overuse them in their pieces. This may be fine if you have a
 powerful machine, but if - like me - you use a Raspberry Pi to jam
-with, you need to be careful about how much work you ask it to do if
-you want to ensure the beats keep flowing.
+with, you need to be careful.
 
 Consider this code:
 
@@ -2446,10 +2140,6 @@ loop do
   end
 end
 ```
-
-In this code we're playing note 60 with a very short release time, so
-it's a short note. We also want reverb so we've wrapped it in a reverb
-block. All good so far. Except...
 
 Let's look at what the code does. First we have a `loop` which means
 everything inside of it is repeated forever. Next we have a `with_fx`
@@ -2478,22 +2168,6 @@ We put our loop *inside* the `with_fx` block. This way we only create
 a single reverb for all notes played in our loop. This code is a lot
 more efficient and would work fine on a Raspberry Pi.
 
-A compromise is to use `with_fx` over an iteration within a loop:
-
-```
-loop do
-  with_fx :reverb do
-    16.times do
-      play 60, release: 0.1
-      sleep 0.125
-    end
-  end
-end
-```
-
-This way we've lifted the `with_fx` out of the inner part of the `loop`
-and we're now creating a new reverb every 16 notes.
-
 Remember, there are no mistakes, just possibilities. However, each of
 these approaches will have a different sound and also different
 performance characteristics. So play around and use the approach that
@@ -2514,7 +2188,6 @@ still playing, just like you might bend a string of a guitar whilst it's
 still vibrating?
 
 You're in luck - this section will show you how to do exactly this.
-7.1 Controlling Running Synths
 
 # Controlling Running Synths
 
@@ -2559,7 +2232,6 @@ opts are controllable by looking at their documentation in the
 help system. If the documentation says *Can not be changed once set*,
 you know it's not possible to control the opt after the synth has
 started.
-7.2 Controlling FX
 
 # Controlling FX
 
@@ -2584,9 +2256,6 @@ do/end block. Inside the `|` bars, we need to specify a unique name
 for our running FX which we then reference from the containing do/end
 block. This behaviour is identical to using parameterised functions.
 
-Now go and control some synths and FX!
-7.3 Sliding Options
-
 # Sliding Opts
 
 Whilst exploring the synth and FX opts, you might have noticed that
@@ -2603,8 +2272,6 @@ sleep 0.5
 control s, note: 65
 sleep 0.5
 control s, note: 67
-sleep 3
-control s, note: 72
 ```
 
 Here, you can hear the synth pitch changing immediately on each
@@ -2618,14 +2285,11 @@ sleep 0.5
 control s, note: 65
 sleep 0.5
 control s, note: 67
-sleep 3
-control s, note: 72
 ```
 
-Now we hear the notes being bent between the `control` calls. It
-sounds nice, doesn't it? You can speed up the slide by using a shorter
-time such as `note_slide: 0.2` or slow it down by using a longer slide
-time.
+Now we hear the notes being bent between the `control` calls. You can speed 
+up the slide by using a shorter time such as `note_slide: 0.2` or slow it 
+down by using a longer slide time.
 
 Every parameter that can be controlled has a corresponding `_slide`
 parameter for you to play with.
@@ -2651,7 +2315,6 @@ end
 
 Now have fun sliding things around for smooth transitions and flowing
 control...
-8 Data Structures
 
 # Data Structures
 
@@ -2660,15 +2323,10 @@ A very useful tool in a programmer's toolkit is a data structure.
 Sometimes you may wish to represent and use more than one thing. For
 example, you may find it useful to have a series of notes to play one
 after another. Programming languages have data structures to allow you
-do exactly this.
+do this.
 
-There are many exciting and exotic data structures available to
-programmers - and people are always inventing new ones. However, for now
-we only really need to consider a very simple data structure - the list.
-
-Let's look at it in more detail. We'll cover its basic form and then
+Let's look at lists in more detail. We'll cover its basic form and then
 also how lists can be used to represent scales and chords.
-8.1 Lists
 
 # Lists
 
@@ -2680,8 +2338,8 @@ randomisation when we randomly chose from a list of notes to play:
 play choose([50, 55, 62])
 ```
 
-In this section we'll explore using lists to also represent chords
-and scales. First let's recap how we might play a chord. Remember that
+In this section we'll explore using lists to also represent *chords
+and scales*. First let's recap how we might play a chord. Remember that
 if we don't use `sleep`, sounds all happen at the same time:
 
 ```
@@ -2696,21 +2354,20 @@ Let's look at other ways to represent this code.
 
 One option is to place all the notes in a list: `[52, 55, 59]`. Our
 friendly `play` function is smart enough to know how to play a list of
-notes. Try it:
+notes.
 
 ```
 play [52, 55, 59]
 ```
 
-Ooh, that's already nicer to read. Playing a list of notes doesn't stop
-you from using any of the parameters as normal:
+Playing a list of notes doesn't stop you from using any of the parameters 
+as normal:
 
 ```
 play [52, 55, 59], amp: 0.3
 ```
 
-Of course, you can also use the traditional note names instead of the
-MIDI numbers:
+You can also use the traditional note names instead of the MIDI numbers:
 
 ```
 play [:E3, :G3, :B3]
@@ -2723,9 +2380,8 @@ recognise that chord as *E Minor* played in the 3rd octave.
 
 Another very useful feature of a list is the ability to get information
 out of it. This may sound a bit strange, but it's no more complicated
-than someone asking you to turn a book to page 23. With a list, you'd
-say, what's the element at index 23? The only strange thing is that in
-programming indexes usually start at 0 not 1. 
+than someone asking you to turn a book to page 23. The only strange thing 
+is that in programming indexes usually start at 0 not 1. 
 
 With list indexes we don't count 1, 2, 3... Instead we count 0, 1, 2...
 
@@ -2735,22 +2391,7 @@ Let's look at this in a little more detail. Take a look at this list:
 [52, 55, 59]
 ```
 
-There's nothing especially scary about this. Now, what's the second
-element in that list? Yes, of course, it's `55`. That was easy. Let's
-see if we can get the computer to answer it for us too:
-
-```
-puts [52, 55, 59][1]
-```
-
-OK, that looks a bit weird if you've never seen anything like it
-before. Trust me though, it's not too hard. There are three parts to the
-line above: the word `puts` , our list `52, 55, 59` and our index
-`[1]`. Firstly we're saying `puts` because we want Sonic Pi to print the
-answer out for us in the log. Next, we're giving it our list, and
-finally our index is asking for the second element. We need to surround
-our index with square brackets and because counting starts at `0`, the
-index for the second element is `1`. Look:
+The indexes for the list are
 
 ```
 # indexes:  0   1   2
@@ -2761,12 +2402,6 @@ Try running the code `puts [52, 55, 59][1]` and you'll see `55` pop up
 in the log. Change the index `1` to other indexes, try longer lists and
 think about how you might use a list in your next code jam. For example,
 what musical structures might be represented as a series of numbers...
-
-
-
-
-
-8.2 Chords
 
 # Chords
 
@@ -2801,7 +2436,7 @@ each call to `play`. We can use another function `play_pattern_timed` to
 specify our own timings and speed things up:
 
 ```
-play_pattern_timed chord(:E3, :m7), 0.25
+play_pattern_timed chord(:E3, :m7), 0.25 # 0.25 is the sleep value between each note being played
 ```
 
 We can even pass a list of times which it will treat as a circle of
@@ -2828,9 +2463,6 @@ play 69
 sleep 0.5
 play 73
 ```
-
-Which would you prefer to write?
-8.3 Scales
 
 # Scales
 
@@ -2877,9 +2509,6 @@ either chord or scale in the API list. In the information in the main
 panel, scroll down until you see a long list of chords or scales
 (depending on which you're looking at).
 
-Have fun and remember: there are no mistakes, only opportunities.
-8.4 Rings
-
 # Rings
 
 An interesting spin on standard lists are rings. If you know some
@@ -2920,9 +2549,9 @@ puts notes[counter]
 ```
 
 Super, we now get `55` and if we do it again we get `59`. However, if we
-do it again, we'll run out of numbers in our list and get `nil`. What if
+do it again, we'll run out of numbers in our list and get `nil`. **What if
 we wanted to just loop back round and start at the beginning of the list
-again? This is what rings are for.
+again? This is what rings are for.**
 
 ## Creating Rings
 
@@ -2972,14 +2601,10 @@ are also rings and allow you to access them with arbitrary indexes.
 In addition to `ring` there are a number of other functions which will
 construct a ring for us.
 
-* `range` invites you specify a starting point, end point and step size.
+* `range` invites you to specify a starting point, end point and step size.
 * `bools` allows you to use `1`s and `0`s to succinctly represent booleans.
 * `knit` allows you to knit a sequence of repeated values.
 * `spread` creates a ring of bools with a Euclidean distribution.
-
-Take a look at their respective documentation for more information.
-
-9 Live Coding
 
 # Live Coding
 
@@ -2992,11 +2617,6 @@ can take Sonic Pi on stage and gig with it.
 
 In this section we'll cover the fundamentals of turning your static code
 compositions into dynamic performances.
-
-Hold on to your seats...
-9.1 Live Coding Fundamentals
-
-# Live Coding
 
 Now we've learned enough to really start having some fun. In this
 section we'll draw from all the previous sections and show you how you
@@ -3040,7 +2660,7 @@ Now, this is where the fun starts. Whilst the code is *still running*
 change 50 to another number, say 55, then press the Run button
 again. Woah! It changed! Live!
 
-It didn't add a new layer because we're using named threads which only
+**It didn't add a new layer because we're using named threads** which only
 allow one thread for each name. Also, the sound changed because we
 *redefined* the function. We gave `:my_loop` a new definition. When the
 `:looper` thread looped around it simply called the new definition.
@@ -3101,20 +2721,7 @@ end
 
 Now things are getting exciting! 
 
-However, before you jump up and start live coding with functions and
-threads, stop what you're doing and read the next section on
-`live_loop` which will change the way you code in Sonic Pi forever...
-9.2 Live Loops
-
 # Live Loops
-
-Ok, so this section of the tutorial is the real gem. If you only read
-one section, it should be this one. If you read the previous section
-on Live Coding Fundamentals, `live_loop` is a simple way of doing
-exactly that but without having to write so much.
-
-If you didn't read the previous section, `live_loop` is the best way to
-jam with Sonic Pi.
 
 Let's play. Write the following in a new buffer:
 
@@ -3176,9 +2783,6 @@ live_loop :foo do
   sleep 8
 end
 ```
-
-Now stop listening to me and play around yourself! Have fun!
-9.3 Multiple Live Loops
 
 # Multiple Live Loops
 
@@ -3273,9 +2877,6 @@ end
 
 Wow, everything is now perfectly in time - all without stopping.
 
-Now, go forth and live code with live loops!
-9.4 Ticking
-
 # Ticking
 
 Something you'll likely find yourself doing a lot when live coding is
@@ -3285,7 +2886,8 @@ sleeps for rhythms, chord progressions, timbral variations, etc. etc.
 ## Ticking Rings
 
 Sonic Pi provides a *very* handy tool for working with rings within
-`live_loop`s. It's called the tick system. It provides you with the ability to *tick through rings*. Let's look at an example:
+`live_loop`s. It's called the tick system. It provides you with the ability to *tick through rings*. 
+Let's look at an example:
 
 ```
 live_loop :arp do
@@ -3294,7 +2896,9 @@ live_loop :arp do
 end
 ```
 
-Here, we're just grabbing the scale E3 minor pentatonic and ticking through each element. This is done by adding `.tick` to the end of the scale declaration. This tick is local to the live loop, so each live loop can have its own independent tick:
+Here, we're just grabbing the scale E3 minor pentatonic and ticking through each element. This is done by 
+adding `.tick` to the end of the scale declaration. This tick is local to the live loop, so each live loop 
+can have its own independent tick:
 
 ```
 live_loop :arp do
@@ -3325,7 +2929,6 @@ However, it is much nicer to call `.tick` at the end. The `tick` fn is
 for when you want to do fancy things with the tick value and for when
 you want to use ticks for other things than indexing into rings.
 
-
 ## Look
 
 The magical thing about tick is that not only does it return a new index
@@ -3348,35 +2951,10 @@ live_loop :arp do
 end
 ```
 
-Here we're using two ticks one for the note to play and another for the
-sleep time. As they're both in the same live loop, to keep them separate
-we need to give them unique names. This is exactly the same kind of
-thing as naming `live_loop`s - we just pass a symbol prefixed with a
-`:`. In the example above we called one tick `:foo` and the other
-`:bar`. If we want to `look` at these we also need to pass the name of
-the tick to `look`.
-
-## Don't make it too complicated
-
-Most of the power in the tick system isn't useful when you get
-started. Don't try and learn everything in this section. Just focus on
-ticking through a single ring. That'll give you most of the joy and
-simplicity of ticking through rings in your `live_loop`s.
-
-Take a look at the documentation for `tick` where there are many useful
-examples and happy ticking!
-
-10 Essential Knowledge
-
-# Essential Knowledge
-
-This section will cover some very useful - in fact *essential* - knowledge
-for getting the most out of your Sonic Pi experience.
-
-We'll cover how to take advantage of the many keyboard shortcuts
-available to you, how to share your work and some tips on performing
-with Sonic Pi.
-10.1 Using Shortcuts
+Here we're using two ticks one for the note to play and another for the sleep time. As they're both in the same live loop, 
+to keep them separate we need to give them unique names. This is exactly the same kind of thing as naming `live_loop`s - we 
+just pass a symbol prefixed with a `:`. In the example above we called one tick `:foo` and the other `:bar`. If we want to 
+`look` at these we also need to pass the name of the tick to `look`.
 
 # Using Shortcuts
 
@@ -3547,9 +3125,6 @@ Windows/Linux or *Cmd* on Mac):
 * `S-M-l` - Toggle visibility of log
 * `S-M-m` - Toggle between light/dark modes
 
-
-10.3 Sharing
-
 # Sharing
 
 Sonic Pi is all about sharing and learning with each other. 
@@ -3590,13 +3165,6 @@ filename.  The recording will be saved as a WAV file, which can be
 edited and converted to MP3 by any number of free programs (try
 Audacity for instance).
 
-## Hope
-
-I encourage you to share your work and really hope that we'll all teach
-each other new tricks and moves with Sonic Pi. I'm really excited by
-what you'll have to show me.
-10.4 Performing
-
 # Performing
 
 One of the most exciting aspects of Sonic Pi is that it enables you to
@@ -3633,266 +3201,6 @@ live coders and systems is [TOPLAP](http://toplap.org).
 Another great resource for exploring the live coding world is
 [Algorave](http://algorave.com). Here you can find all about a specific
 strand of live coding for making music in nightclubs.
-11 Minecraft Pi
-
-# Minecraft Pi
-
-Sonic Pi now supports a simple API for interacting with Minecraft Pi -
-the special edition of Minecraft which is installed by default on the
-Raspberry Pi's Raspbian Linux-based operating system.
-
-## No need to import libraries
-
-The Minecraft Pi integration has been designed to be insanely easy to
-use. All you need to do is to launch a Minecraft Pi and create a
-world. You're then free to use the `mc_*` fns just like you might use
-`play` and `synth`. There's no need to import anything or install any
-libraries - it's all ready to go and works out of the box.
-
-## Automatic Connection
-
-The Minecraft Pi API takes care of managing your connection to the
-Minecraft Pi application. This means you don't need to worry about a
-thing. If you try and use the Minecraft Pi API when Minecraft Pi isn't
-open, Sonic Pi will politely tell you. Similarly, if you close Minecraft
-Pi whilst you're still running a `live_loop` that uses the API, the live
-loop will stop and politely tell you that it can't connect. To
-reconnect, just launch Minecraft Pi again and Sonic Pi will
-automatically detect and re-create the connection for you.
-
-## Designed to be Live Coded
-
-The Minecraft Pi API has been designed to work seamlessly within
-`live_loop`s. This means it's possible to synchronise modifications in
-your Minecraft Pi worlds with modifications in your Sonic Pi
-sounds. Instant Minecraft-based music videos! Note however that
-Minecraft Pi is alpha software and is known to be slightly buggy. If you
-encounter any problems simply restart Minecraft Pi and carry on as
-before. Sonic Pi's automatic connection functionality will take care of
-things for you.
-
-## Requires a Raspberry Pi 2.0
-
-It is highly recommended that you use a Raspberry Pi 2 if you wish to
-run both Sonic Pi and Minecraft at the same time - especially if you
-want to use Sonic Pi's sound capabilities.
-
-## API Support
-
-At this stage, Sonic Pi supports basic block and player manipulations
-which are detailed in Section 11.1. Support for event callbacks
-triggered by player interactions in the world is planned for a future
-release.
-11.1 Basic API
-
-# Basic Minecraft Pi API
-
-Sonic Pi currently supports the following basic interactions with Minecraft Pi:
-
-* Displaying chat messages
-* Setting the position of the user
-* Getting the position of the user
-* Setting the block type at a given coordinate
-* Getting the block type at a given coordinate
-
-
-Let's look at each of these in turn.
-
-## Displaying chat messages
-
-Let's see just how easy it is to control Minecraft Pi from Sonic
-Pi. First, make sure you have both Minecraft Pi and Sonic Pi open at the
-same time and also make sure you've entered a Minecraft world and can
-walk around.
-
-In a fresh Sonic Pi buffer simply enter the following code:
-
-```
-mc_message "Hello from Sonic Pi"
-```
-
-When you hit the *Run* button, you'll see your message flash up on the
-Minecraft window. Congratulations, you've written your first Minecraft
-code! That was easy wasn't it.
-
-## Setting the position of the user
-
-Now, let's try a little magic. Let's teleport ourselves somewhere! Try
-the following:
-
-```
-mc_teleport 50, 50, 50
-```
-
-When you hit *Run* - boom! You're instantantly transported to a new
-place. Most likely it was somewhere in the sky and you fell down either
-to dry land or into water. Now, what are those numbers: `50, 50, 50`?
-They're the coordinates of the location you're trying to teleport
-to. Let's take a brief moment to explore what coordinates are and how
-they work because they're really, really important for programming
-Minecraft.
-
-## Coordinates
-
-Imagine a pirate's map with a big `X` marking the location of some
-treasure. The exact location of the `X` can be described with two
-numbers - how far along the map from left to right and how far along the
-map from bottom to top. For example `10cm` across and `8cm` up. These
-two numbers `10` and `8` are coordinates. You could easily imagine
-describing the locations of other stashes of treasure with other pairs
-of numbers. Perhaps there's a big chest of gold at `2` across and `9`
-up...
-
-Now, in Minecraft two numbers isn't quite enough. We also need to know
-how high we are. We therefore need three numbers:
-
-* How far from right to left in the world - `x`
-* How far from front to back in the world - `z`
-* How high up we are in the world - `y`
-One more thing - we typically describe these coordinates in this order
-`x`, `y`, `z`.
-
-## Finding your current coordinates
-
-Let's have a play with coordinates. Navigate to a nice place in the
-Minecraft map and then switch over to Sonic Pi. Now enter the following:
-
-```
-puts mc_location
-```
-
-When you hit the *Run* button you'll see the coordinates of your current
-position displayed in the log window. Take a note of them, then move
-forward in the world and try again. Notice how the coordinates changed!
-Now, I recommend you spend some time repeating exactly this - move a bit
-in the world, take a look at the coordinates and repeat. Do this until
-you start to get a feel for how the coordinates change when you
-move. Once you've understood how coordinates work, programming with the
-Minecraft API will be a complete breeze.
-
-## Let's Build!
-
-Now that you know how to find the current position and to teleport using
-coordinates, you have all the tools you need to start building things in
-Minecraft with code. Let's say you want to make the block with
-coordinates `40`, `50`, `60` to be glass. That's super easy:
-
-```
-mc_set_block :glass, 40, 50, 60
-```
-
-Haha, it really was that easy. To see your handywork just teleport
-nearby and take a look:
-
-```
-mc_teleport 35, 50, 60
-```
-
-Now turn around and you should see your glass block! Try changing it to
-diamond:
-
-```
-mc_set_block :diamond, 40, 50, 60
-```
-
-If you were looking in the right direction you might have even seen it
-change in front of your eyes! This is the start of something exciting...
-
-## Looking at blocks
-
-Let's look at one last thing before we move onto something a bit more
-involved. Given a set of coordinates we can ask Minecraft what the type
-of a specific block is. Let's try it with the diamond block you just
-created:
-
-```
-puts mc_get_block 40, 50, 60
-```
-
-Yey! It's `:diamond`. Try changing it back to glass and asking again -
-does it now say `:glass`? I'm sure it does :-)
-
-## Available block types
-
-Before you go on a Minecraft Pi coding rampage, you might find this list
-of available block types useful:
-
-        :air
-        :stone
-        :grass
-        :dirt
-        :cobblestone
-        :wood_plank
-        :sapling
-        :bedrock
-        :water_flowing
-        :water
-        :water_stationary
-        :lava_flowing
-        :lava
-        :lava_stationary
-        :sand
-        :gravel
-        :gold_ore
-        :iron_ore
-        :coal_ore
-        :wood
-        :leaves
-        :glass
-        :lapis
-        :lapis_lazuli_block
-        :sandstone
-        :bed
-        :cobweb
-        :grass_tall
-        :flower_yellow
-        :flower_cyan
-        :mushroom_brown
-        :mushroom_red
-        :gold_block
-        :gold
-        :iron_block
-        :iron
-        :stone_slab_double
-        :stone_slab
-        :brick
-        :brick_block
-        :tnt
-        :bookshelf
-        :moss_stone
-        :obsidian
-        :torch
-        :fire
-        :stairs_wood
-        :chest
-        :diamond_ore
-        :diamond_block
-        :diamond
-        :crafting_table
-        :farmland
-        :furnace_inactive
-        :furnace_active
-        :door_wood
-        :ladder
-        :stairs_cobblestone
-        :door_iron
-        :redstone_ore
-        :snow
-        :ice
-        :snow_block
-        :cactus
-        :clay
-        :sugar_cane
-        :fence
-        :glowstone_block
-        :bedrock_invisible
-        :stone_brick
-        :glass_pane
-        :melon
-        :fence_gate
-        :glowing_obsidian
-        :nether_reactor_core
-12 Conclusions
 
 # Conclusions
 
@@ -3901,20 +3209,3 @@ learned something along the way. Don't worry if you feel you didn't
 understand everything - just play and have fun and you'll pick things up
 in your own time. Feel free to dive back in when you have a question that
 might be covered in one of the sections.
-
-If you have any questions that haven't been covered in the tutorial,
-then please jump onto the [Sonic Pi forums](http://groups.google.com/group/sonic-pi/)
-and ask your question there. You'll find someone friendly and willing to
-lend a hand.
-
-Finally, I also invite you to take a deeper look at the rest of the
-documentation in this help system. There are a number of features that
-haven't been covered in this tutorial that are waiting for your
-discovery.
-
-So play, have fun, share your code, perform for your friends, show your
-screens and remember:
-
-*There are no mistakes, only opportunities.*
-
-[Sam Aaron](http://twitter.com/samaaron)
