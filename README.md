@@ -119,123 +119,6 @@ Now, keep playing and experimenting until your curiosity about how this
 all actually works kicks in and you start wondering what else you can do
 with this. You're now ready to read the rest of the tutorial.
 
-So what are you waiting for...
-1.2 Exploring the Interface
-
-# The Sonic Pi Interface
-
-Sonic Pi has a very simple interface for coding music. Let's spend a
-little time exploring it.
-
-![Sonic Pi Interface](../images/tutorial/GUI.png)
-
-
-* *A* - Play Controls
-* *B* - Editor Controls
-* *C* - Info and Help
-* *D* - Code Editor
-* *E* - Prefs Panel
-* *F* - Log Viewer
-* *G* - Help System
-
-
-## A. Play Controls
-
-These pink buttons are the main controls for starting and stopping
-sounds. There's the *Run* button for running the code in the editor,
-*Stop* for stopping all running code, *Save* for saving the code to an
-external file and *Record* to create a recording (a WAV file) of the
-sound playing.
-
-## B. Editor Controls
-
-These orange buttons allow you to manipulate the code editor. The *Size
-+* and *Size -* buttons allow you to make the text bigger and
-smaller. The *Align* button will neaten the code for you to make it look
-more professional.
-
-## C. Info and Help
-
-These blue buttons give you access to information, help and
-preferences. The *Info* button will open up the information window which
-contains information about Sonic Pi itself - the core team, history,
-contributors and community. The *Help* button toggles the help system
-(*F*) and the *Prefs* button toggles the preferences window which allows
-you to control some basic system parameters.
-
-## D. Code Editor
-
-This is the area where you'll write your code and compose/perform
-music. It's a simple text editor where you can write code, delete it,
-cut and paste, etc. Think of it like a very basic version of Word or
-Google Docs. The editor will automatically colour words based on their
-meaning in the code. This may seem strange at first, but you'll soon
-find it very useful. For example, you'll know something is a number
-because it is blue.
-
-## E. Prefs Panel
-
-Sonic Pi supports a number of tweakable preferences which can be
-accessed by toggling the *prefs* button in the Info and Help button
-set. This will toggle the visibility of the Prefs Panel which includes a
-number of options to be changed. Examples are forcing mono mode,
-inverting stereo, Toggling log output verbosity and also a volume slider
-and audio selector on the Raspberry Pi.
-
-## F. Log Viewer
-
-When you run your code, information about what the program is doing will
-be displayed in the log viewer. By default, you'll see a message for
-every sound you create with the exact time the sound was triggered. This
-is very useful for debugging your code and understanding what your code
-is doing.
-
-## G. Help System
-
-Finally, one of the most important parts of the Sonic Pi interface is
-the help system which appears at the bottom of the window. This can be
-toggled on and off by clicking on the blue *Help* button. The help
-system contains help and information about all aspects of Sonic Pi
-including this tutorial, a list of available synths, samples, examples,
-FX and a full list of all the functions Sonic Pi provides for coding
-music.
-1.3 Learning through Play
-
-# Learning through Play
-
-Sonic Pi encourages you to learn about both computing and music through
-play and experimentation. The most important thing is that you're having
-fun, and before you know it you'll have accidentally learned how to
-code, compose and perform.
-
-## There are no mistakes
-
-Whilst we're on this subject, let me just give you one piece of advice
-I've learned over my years of live coding with music - *there are no
-mistakes, only opportunities*. This is something I've often heard in
-relation to jazz but it works equally well with live coding. No matter
-how experienced you are - from a complete beginner to a seasoned
-Algoraver, you'll run some code that has a completely unexpected
-outcome. It might sound insanely cool - in which case run with
-it. However, it might sound totally jarring and out of place. It doesn't
-matter that it happened - what matters is what you do next with it. Take
-the sound, manipulate it and morph it into something awesome. The crowd
-will go *wild*.
-
-## Start Simple
-
-When you're learning, it's tempting to want to do amazing things
-*now*. However, just hold that thought and see it as a distant goal to
-reach *later*. For now, instead think of the *simplest* thing you could
-write which would be fun and rewarding that's a small step towards the
-amazing thing you have in your head. Once you have an idea about that
-simple step, then try and build it, play with it and then see what new
-ideas it gives you. Before long you'll be too busy having fun and making
-real progress. 
-
-Just make sure to share your work with others!
-2 Synths
-
 # Synths
 
 OK, enough of the intros - let's get into some sound.
@@ -251,50 +134,6 @@ Don't be fooled by the immediate simplicity of Sonic Pi's interface. You
 can get very deep into very sophisticated sound manipulation if that's
 your thing. Hold on to your hats...
 2.1 Your First Beeps
-
-# Your First Beeps
-
-Take a look at the following code:
-
-```
-play 70
-```
-
-This is where it all starts. Go ahead, copy and paste it into the code
-window at the top of the app (the big white space under the Run
-button). Now, press Run...
-
-## Beep!
-
-Intense. Press it again. And again. *And again...*
-
-Woah, crazy, I'm sure you could keep doing that all day. But wait,
-before you lose yourself in an infinite stream of beeps, try changing
-the number:
-
-```
-play 75
-```
-
-Can you hear the difference? Try a lower number:
-
-```
-play 60
-
-```
-
-So, lower numbers make lower pitched beeps and higher numbers make
-higher pitched beeps. Just like on a piano, the keys at the lower part
-of the piano (the left hand side) play lower notes and the keys on the
-higher part of the piano (the right hand side) play higher notes. In
-fact, the numbers actually relate to notes on the piano. `play 47`
-actually means play the 47th note on the piano. Which means that `play 48`
-is one note up (the next note to the right). It just so happens that
-the 4th octave C is number 60. Go ahead and play it: `play 60`.
-
-*Don't worry* if this means nothing to you - it didn't to me when I
- first started. All that matters right now is that you know that *low
- numbers make lower beeps* and *high numbers make higher beeps*.
 
 ## Chords
 
@@ -408,34 +247,8 @@ Opts are passed to calls to `play` by using a comma
 `,` and then the name of the opt such as `amp:` (don't forget the
 colon `:`) and then a space and the value of the opt. For example:
 
-```
-play 50, cheese: 1
-```
-
-(Note that `cheese:` isn't a valid opt, we're just using it as an example).
-
-You can pass multiple opts by separating them with a comma:
-
-```
-play 50, cheese: 1, beans: 0.5
-```
-
-The order of the opts doesn't matter, so the following is identical:
-
-```
-play 50, beans: 0.5, cheese: 1
-```
-
-Opts that aren't recognised by the synth are just ignored (like
-`cheese` and `beans` which are clearly ridiculous opt names!)
-
 If you accidentally use the same opt twice with different values, the
-last one wins. For example, `beans:` here will have the value 2 rather
-than 0.5:
-
-```
-play 50, beans: 0.5, cheese: 3, eggs: 0.1, beans: 2
-```
+last one wins.
 
 Many things in Sonic Pi accept opts, so just spend a little time
 learning how to use them and you'll be set! Let's play with our first
@@ -522,7 +335,6 @@ position):
 play 60, pan: 0
 ```
 
-Now, go and have fun changing the amplitude and panning of your sounds!
 2.3 Switching Synths
 
 # Switching Synths
