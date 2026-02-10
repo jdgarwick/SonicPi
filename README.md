@@ -12,7 +12,6 @@ and approachable manner.
 Don't be fooled by the immediate simplicity of Sonic Pi's interface. You
 can get very deep into very sophisticated sound manipulation if that's
 your thing. Hold on to your hats...
-2.1 Your First Beeps
 
 ## Chords
 
@@ -95,8 +94,6 @@ play :E4
 If you want to make a note sharp, add an `s` after the note name such as
 `play :Fs3` and if you want to make a note flat, add a `b` such as `play :Eb3`.
 
-Now go *crazy* and have fun making your own tunes.
-
 # Synth Options: Amp and Pan
 
 As well as allowing you to control which note to play or which sample to
@@ -105,7 +102,6 @@ control the sounds. We'll be covering many of these in this tutorial and
 there's extensive documentation for each in the help system. However,
 for now we'll introduce two of the most useful: *amplitude* and *pan*.
 First, let's look at what options actually are.
-
 
 ## Options
 
@@ -145,7 +141,6 @@ high, Sonic Pi uses what's called a compressor to squash them all to
 make sure things aren't too loud for your ears. This can often make the
 sound muddy and strange. So try to use low amplitudes, i.e. in the range
 0 to 0.5 to avoid compression.
-
 
 ## Amp it up
 
@@ -289,7 +284,6 @@ Notice that the `use_synth` command only affects the following calls to
 `play`. Think of it like a *big switch* - new calls to `play` will play
 whatever synth it's currently pointing to. You can move the switch to a
 new synth with `use_synth`.
-
 
 ## Discovering Synths
 
