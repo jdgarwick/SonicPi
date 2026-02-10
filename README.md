@@ -217,7 +217,6 @@ If you want to make a note sharp, add an `s` after the note name such as
 `play :Fs3` and if you want to make a note flat, add a `b` such as `play :Eb3`.
 
 Now go *crazy* and have fun making your own tunes.
-2.2 Synth Options
 
 # Synth Options: Amp and Pan
 
@@ -335,8 +334,6 @@ position):
 play 60, pan: 0
 ```
 
-2.3 Switching Synths
-
 # Switching Synths
 
 So far we've had quite a lot of fun making beeps. However, you're
@@ -419,20 +416,9 @@ new synth with `use_synth`.
 
 To see which synths Sonic Pi has for you to play with take a look at the
 Synths option in the far left vertical menu (above Fx). There are
-over 20 to choose from. Here are a few of my favourites:
+over 20 to choose from.
 
-* `:prophet`
-* `:dsaw`
-* `:fm`
-* `:tb303`
-* `:pulse`
-
-Now play around with *switching synths during your music*. Have fun
-combining synths to make new sounds as well as using different synths
-for different sections of your music.
-2.4 Duration with Envelopes
-
-# Duration with Envelopes
+# Sound Duration with Envelopes
 
 In an earlier section, we looked at how we can use the `sleep` command
 to control when to trigger our sounds. However, we haven't yet been able
@@ -466,9 +452,6 @@ the volume of a guitar amplifier. For example you might ask someone to
 then quickly fall back to silence." Sonic Pi allows you to program
 exactly this behaviour with envelopes.
 
-Just to recap, as we have seen before, an amplitude of 0 is silence and
-an amplitude of 1 is normal volume.
-
 Now, let us look at each of the parts of the envelopes in turn.
 
 ## Release Phase
@@ -478,38 +461,11 @@ time. This is the time it takes for the synth's sound to fade out. All
 synths have a release time of 1 which means that by default they have a
 duration of 1 beat (which at the default BPM of 60 is 1 second):
 
-```
-play 70
-```
-
-The note will be audible for 1 second.  Go ahead and time it :-) This is
-short hand for the longer more explicit version:
-
-```
-play 70, release: 1
-```
-
-Notice how this sounds exactly the same (the sound lasts for one
-second). However, it's now very easy to change the duration by modifying
-the value of the `release:` opt:
-
-
-```
-play 60, release: 2
-```
-
-We can make the synth sound for a very short amount of time by using a
-very small release time:
-
-```
-play 60, release: 0.2
-```
-
 The duration of the release of the sound is called the *release phase*
 and by default is a linear transition (i.e. a straight line). The
 following diagram illustrates this transition:
 
-![release envelope](../images/tutorial/env-release.png)
+<img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/db2b3257-31be-42b7-9c04-a1c98b3e48ce" />
 
 The vertical line at the far left of the diagram shows that the sound
 starts at 0 amplitude, but goes up to full amplitude immediately (this
@@ -526,13 +482,7 @@ release time. Have a play adding release times to your music.
 By default, the *attack phase* is 0 for all synths which means they move
 from 0 amplitude to 1 immediately. This gives the synth an initial
 percussive sound. However, you may wish to fade your sound in. This can
-be achieved with the `attack:` opt. Try fading in some sounds:
-
-```
-play 60, attack: 2
-sleep 3
-play 65, attack: 0.5
-```
+be achieved with the `attack:` opt. 
 
 You may use multiple opts at the same time. For example for a short
 attack and a long release try:
@@ -541,41 +491,12 @@ attack and a long release try:
 play 60, attack: 0.7, release: 4
 ```
 
-This short attack and long release envelope is illustrated in the
-following diagram:
-
-![attack release envelope](../images/tutorial/env-attack-release.png)
-
-Of course, you may switch things around. Try a long attack and a short
-release:
-
-```
-play 60, attack: 4, release: 0.7
-```
-
-![long attack short release envelope](../images/tutorial/env-long-attack-short-release.png)
-
-Finally, you can also have both short attack and release times for
-shorter sounds.
-
-```
-play 60, attack: 0.5, release: 0.5
-```
-
-![short attack short release envelope](../images/tutorial/env-short-attack-short-release.png)
-
 ## Sustain Phase
 
 In addition to specifying attack and release times, you may also specify
 a sustain time to control the *sustain phase*. This is the time for
 which the sound is maintained at full amplitude between the attack and
 release phases.
-
-```
-play 60, attack: 0.3, sustain: 1, release: 1
-```
-
-![ASR envelope](../images/tutorial/env-attack-sustain-release.png)
 
 The sustain time is useful for important sounds you wish to give full
 presence in the mix before entering an optional release phase. Of
@@ -595,33 +516,11 @@ it will be set to the `sustain_level:`). By default, the `decay:` opt is
 0 and both the attack and sustain levels are 1 so you'll need to specify
 them for the decay time to have any effect:
 
-```
-play 60, attack: 0.1, attack_level: 1, decay: 0.2, sustain_level: 0.4, sustain: 1, release: 0.5
-```
-
-![ADSR envelope](../images/tutorial/env-attack-decay-sustain-release.png)
-
-
 ## Decay Level
 
 One last trick is that although the `decay_level:` opt defaults to be
 the same value as `sustain_level:` you can explicitly set them to
-different values for full control over the envelope. This allows you to
-to create envelopes such as the following:
-
-```
-play 60, attack: 0.1, attack_level: 1, decay: 0.2, decay_level: 0.3, sustain: 1, sustain_level: 0.4, release: 0.5
-```
-
-![ASR envelope](../images/tutorial/env-decay-level.png)
-
-It's also possible to set the `decay_level:` to be higher than `sustain_level:`:
-
-```
-play 60, attack: 0.1, attack_level: 0.1, decay: 0.2, decay_level: 1, sustain: 0.5, sustain_level: 0.8, release: 1.5
-```
-
-![ASR envelope](../images/tutorial/env-decay-level-2.png)
+different values for full control over the envelope.
 
 ## ADSR Envelopes
 
@@ -639,9 +538,6 @@ have a duration of 0.5 + 1 + 2 + 0.5 = 4 beats:
 ```
 play 60, attack: 0.5, attack_level: 1, decay: 1, sustain_level: 0.4, sustain: 2, release: 0.5
 ```
-
-Now go and have a play adding envelopes to your sounds...
-3 Samples
 
 # Samples
 
