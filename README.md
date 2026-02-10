@@ -1,7 +1,5 @@
 # SonicPi
 
-1 Welcome to Sonic Pi
-
 ## Free your mind
 
 Before we get into the real details of how Sonic Pi works in the rest of
