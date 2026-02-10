@@ -340,13 +340,6 @@ following diagram illustrates this transition:
 
 <img width="1280" height="720" alt="image" src="https://github.com/user-attachments/assets/db2b3257-31be-42b7-9c04-a1c98b3e48ce" />
 
-The vertical line at the far left of the diagram shows that the sound
-starts at 0 amplitude, but goes up to full amplitude immediately (this
-is the attack phase which we'll cover next). Once at full amplitude it
-then moves in a straight line down to zero taking the amount of time
-specified by `release:`.  *Longer release times produce longer synth
-fade outs.*
-
 You can therefore change the duration of your sound by changing the
 release time. Have a play adding release times to your music.
 
