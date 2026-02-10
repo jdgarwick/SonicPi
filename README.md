@@ -1,4 +1,4 @@
-# SonicPi
+# SonicPi Tutorial and Notes
 
 # Synths
 
