@@ -2,15 +2,6 @@
 
 1 Welcome to Sonic Pi
 
-# Welcome friend :-)
-
-# Live Coding
-
-One of the most exciting aspects of Sonic Pi is that it enables you to
-write and *modify code live* to make music, just like you might perform
-live with a guitar. This means that given some practice you can take
-Sonic Pi on stage and gig with it.
-
 ## Free your mind
 
 Before we get into the real details of how Sonic Pi works in the rest of
