@@ -1,4 +1,16 @@
 # SonicPi Tutorial and Notes
+A quick note on lissajous curves:
+
+The LISSAJOUS curve is plotting the relat. b/t the left and right speaker.
+If left = right, then sound is mono (lissajous is straight line) - sound is 
+centered and has similar signals from both speakers. If left does **not** equal 
+right (ovals, circles, messy), then L/R channels are different
+
+*Analogy:*
+Imagine two people jumping:
+Left speaker = Person A; Right speaker = Person B
+If they jump at the same time → straight line; If they jump slightly off → oval; 
+If they jump differently → it gives a weird shape
 
 # Synths
 
