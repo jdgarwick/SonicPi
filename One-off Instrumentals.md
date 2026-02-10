@@ -2,11 +2,10 @@
 
 Here's an intro sound 
 
-'''
+```
 # variables
 guit_e_dur_half = 2.985
 
-```
 # intro slice - NOTE THE FX CHAIN: GATE/DYNAMICS (###) -> COMPRESSOR (CLEANS NOISE BY REDUCING LOUD AND RAISING QUIET) -> EQ (SHAPES THE TONE. CAN MAKE WARMER/BRIGHTER/THICKER/THINNER) -> DELAY FX (ECHO/DELAY/ETC.) -> REVERB
 with_fx :ring_mod, amp: 5 do
   stop
